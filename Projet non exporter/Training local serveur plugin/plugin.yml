@@ -1,0 +1,17 @@
+name : TrainingPlugin
+version : 1.0
+author : Lightiz
+main: fr.lightiz.trainingplugin.Main
+commands: 
+  startkit:
+    description: A command for give a startkit to the player
+    permission: startkit.use
+  bc:
+    description: A command for warn every connected players
+    permission: bc.use
+  feed: 
+    description: A command for set your hunger to max hunger
+    permission: feed.use
+  heal:
+    description: A command for set your health to max health
+    permission: heal.use
