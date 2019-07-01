@@ -2,7 +2,10 @@ package fr.lightiz.trainingplugin;
 
 import java.util.Arrays;
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +27,7 @@ public class PluginListener implements Listener
 		ItemStack compass = new ItemStack(Material.COMPASS, 1);
 		ItemMeta compassMeta = compass.getItemMeta();
 		compassMeta.setDisplayName("§cJesus's Object");
-		compassMeta.setLore(Arrays.asList("The object of Jesus !"));
+		compassMeta.setLore(Arrays.asList("The object of Jesus !", "§cThis a trash can too ^^'"));
 		compassMeta.addEnchant(Enchantment.DAMAGE_ALL, 50, true);
 		compass.setItemMeta(compassMeta);
 		
@@ -41,9 +44,23 @@ public class PluginListener implements Listener
 	{
 		Player player = interractEvent.getPlayer();
 		Action interract = interractEvent.getAction();		
-		ItemStack inventoryContainers = interractEvent.getItem();		
+		ItemStack inventoryContainers = interractEvent.getItem();
 		
 		Inventory inv = Bukkit.createInventory(null, 54, ("§2BIG §cTRASH CAN "));
+		
+		if(interractEvent.getClickedBlock() != null && interract == Action.RIGHT_CLICK_BLOCK) 
+		{
+			BlockState bs = interractEvent.getClickedBlock().getState();
+			if(bs instanceof Sign) 
+			{
+				Sign sign = (Sign) bs;
+				if(sign.getLine(0).equalsIgnoreCase("Click on me") 
+				   && (sign.getLine(3).equalsIgnoreCase("Warning")))
+				{
+					 player.playEffect(EntityEffect.DEATH);
+				}
+			}
+		}
 		
 		if(inventoryContainers == null) 
 		{

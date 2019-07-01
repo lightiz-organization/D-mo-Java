@@ -5,19 +5,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer extends BukkitRunnable
 {
-	private int timer = 10;
+	private int timer = 0;
 	
 	@Override
 	public void run()
 	{	
 		Bukkit.broadcastMessage("Il y a " + timer + "s d'écouler !");
 		
-		if(timer == 0) 
+		if(timer == 10) 
 		{
 			Bukkit.broadcastMessage("Le timer est à 10 !");
 			cancel();
 		}
 		
-		timer--;
+		timer++;
 	}
 }

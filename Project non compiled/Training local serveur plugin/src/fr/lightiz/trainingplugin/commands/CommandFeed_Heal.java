@@ -16,7 +16,7 @@ public class CommandFeed_Heal implements CommandExecutor
 			Player player = (Player)sender;
 			
 			if(cmd.getName().equalsIgnoreCase("feed")) 
-			{
+			{	
 				player.getFoodLevel();
 				player.setFoodLevel(20);
 				
