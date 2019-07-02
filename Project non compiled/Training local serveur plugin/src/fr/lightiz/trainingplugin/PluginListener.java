@@ -1,9 +1,11 @@
 package fr.lightiz.trainingplugin;
 
 import java.util.Arrays;
+
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
+
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
@@ -16,7 +18,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
+ 
 public class PluginListener implements Listener
 {
 	@EventHandler
@@ -28,12 +30,14 @@ public class PluginListener implements Listener
 		ItemMeta compassMeta = compass.getItemMeta();
 		compassMeta.setDisplayName("§cJesus's Object");
 		compassMeta.setLore(Arrays.asList("The object of Jesus !", "§cThis a trash can too ^^'"));
-		compassMeta.addEnchant(Enchantment.DAMAGE_ALL, 50, true);
+ 		compassMeta.addEnchant(Enchantment.DAMAGE_ALL, 50, true);
 		compass.setItemMeta(compassMeta);
 		
 		player.getInventory().clear();
 		player.getInventory().remove(Material.COMPASS);
-		player.getInventory().addItem(compass);
+		
+		player.getInventory().addItem(compass);	
+		player.updateInventory();
 		
 		player.sendMessage("§cBievenue sur le serveur de test, " + player.getName() + "!");
 

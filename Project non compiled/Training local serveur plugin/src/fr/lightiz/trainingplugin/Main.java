@@ -4,7 +4,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import fr.lightiz.trainingplugin.commands.CommandAlert;
 import fr.lightiz.trainingplugin.commands.CommandFeed_Heal;
 import fr.lightiz.trainingplugin.commands.CommandStartkit;
-import fr.lightiz.trainingplugin.tasks.Timer;
 
 public class Main extends JavaPlugin
 {
@@ -17,10 +16,7 @@ public class Main extends JavaPlugin
 		getCommand("feed").setExecutor(new CommandFeed_Heal());
 		getCommand("heal").setExecutor(new CommandFeed_Heal());
 		
-		getServer().getPluginManager().registerEvents(new PluginListener(), this);
-				
-		Timer timer = new Timer();
-		timer.runTaskTimer(this, 0, 20);
+		getServer().getPluginManager().registerEvents(new PluginListener(), this);			
 	}
 	
 	@Override
