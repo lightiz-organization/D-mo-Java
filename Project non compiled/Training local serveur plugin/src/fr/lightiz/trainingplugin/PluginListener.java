@@ -36,6 +36,7 @@ public class PluginListener implements Listener
 		player.getInventory().addItem(compass);
 		
 		player.sendMessage("§cBievenue sur le serveur de test, " + player.getName() + "!");
+
 	}
 	
 	@SuppressWarnings("static-access")
@@ -54,10 +55,25 @@ public class PluginListener implements Listener
 			if(bs instanceof Sign) 
 			{
 				Sign sign = (Sign) bs;
+				
 				if(sign.getLine(0).equalsIgnoreCase("Click on me") 
 				   && (sign.getLine(3).equalsIgnoreCase("Warning")))
 				{
-					 player.playEffect(EntityEffect.HURT);
+					 player.playEffect(EntityEffect.DEATH);
+				}
+			}
+		}
+		
+		if(interractEvent.getClickedBlock() != null && interract == Action.RIGHT_CLICK_BLOCK) 
+		{
+			BlockState bs = interractEvent.getClickedBlock().getState();
+			if(bs instanceof Sign) 
+			{
+				Sign sign = (Sign) bs;
+				
+				if(sign.getLine(1).equalsIgnoreCase("Give"))				   
+				{
+					 Bukkit.getWorld("world").dropItem(player.getLocation(), new ItemStack(Material.DIAMOND));
 				}
 			}
 		}
