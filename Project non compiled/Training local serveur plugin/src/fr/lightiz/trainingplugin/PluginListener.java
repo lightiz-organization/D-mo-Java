@@ -57,7 +57,7 @@ public class PluginListener implements Listener
 				if(sign.getLine(0).equalsIgnoreCase("Click on me") 
 				   && (sign.getLine(3).equalsIgnoreCase("Warning")))
 				{
-					 player.playEffect(EntityEffect.DEATH);
+					 player.playEffect(EntityEffect.HURT);
 				}
 			}
 		}

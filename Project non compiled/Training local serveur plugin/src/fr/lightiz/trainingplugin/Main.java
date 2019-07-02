@@ -1,7 +1,6 @@
 package fr.lightiz.trainingplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
-
 import fr.lightiz.trainingplugin.commands.CommandAlert;
 import fr.lightiz.trainingplugin.commands.CommandFeed_Heal;
 import fr.lightiz.trainingplugin.commands.CommandStartkit;
