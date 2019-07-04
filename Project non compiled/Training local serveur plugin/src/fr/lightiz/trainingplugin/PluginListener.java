@@ -3,7 +3,6 @@ package fr.lightiz.trainingplugin;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 
@@ -14,15 +13,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
  
 public class PluginListener implements Listener
 {
@@ -48,8 +43,9 @@ public class PluginListener implements Listener
 
 	}
 	
-	@SuppressWarnings({
-			"static-access", "deprecation"
+	@SuppressWarnings
+	({
+			"static-access"
 	})
 	@EventHandler
 	public void onInterract(PlayerInteractEvent interractEvent) 
@@ -70,21 +66,7 @@ public class PluginListener implements Listener
 				if(sign.getLine(0).equalsIgnoreCase("Click on me") 
 				   && (sign.getLine(3).equalsIgnoreCase("Warning")))
 				{
-					 player.playEffect(EntityEffect.DEATH);
-				}
-			}
-		}
-		
-		if(interractEvent.getClickedBlock() != null && interract == interract.RIGHT_CLICK_BLOCK) 
-		{
-			BlockState bs = interractEvent.getClickedBlock().getState();
-			if(bs instanceof Sign) 
-			{
-				Sign s = (Sign) bs;
-				
-				if(s.getLine(1).equalsIgnoreCase("Give"))				   
-				{
-					 player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.DIAMOND));
+					 player.playEffect(EntityEffect.DEATH);				 
 				}
 			}
 		}
@@ -102,33 +84,5 @@ public class PluginListener implements Listener
 		{
 			player.openInventory(inv);
 		}
-		
-		if(interractEvent.getClickedBlock() != null && interract == interract.RIGHT_CLICK_BLOCK) 
-		{
-			BlockState bs0 = interractEvent.getClickedBlock().getState();
-			if(bs0 instanceof Sign)
-			{
-				Sign s0 = (Sign) bs0;
-				if(s0.getLine(0).equalsIgnoreCase("Hide")) 
-				{
-					player.playEffect(player.getLocation(), Effect.PARTICLE_SMOKE, 20);
-				}
-			}		
-		}
-	}
-	
-	public void onDeath(PlayerDeathEvent deathEvent) 
-	{
-		Player player = deathEvent.getEntity();
-		
-		player.getWorld().createExplosion(player.getLocation(), 4);
-	}
-	
-	public void onLeaveBed(PlayerBedLeaveEvent leaveBedEvent) 
-	{
-		Player player = leaveBedEvent.getPlayer();
-		PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 12, 12);
-		
-		player.addPotionEffect(p);
 	}
 }
