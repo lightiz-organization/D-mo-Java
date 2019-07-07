@@ -15,9 +15,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
  
 public class PluginListener implements Listener
 {
@@ -84,5 +87,13 @@ public class PluginListener implements Listener
 		{
 			player.openInventory(inv);
 		}
+	}
+
+	public void onRespawn(PlayerRespawnEvent respawnEvent) 
+	{
+		Player p = respawnEvent.getPlayer();
+		PotionEffect e = new PotionEffect(PotionEffectType.REGENERATION, 10, 10);
+		
+		p.addPotionEffect(e);
 	}
 }
