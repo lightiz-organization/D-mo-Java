@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
-
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
@@ -13,15 +13,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
- 
+
 public class PluginListener implements Listener
 {
 	@EventHandler
@@ -89,11 +89,20 @@ public class PluginListener implements Listener
 		}
 	}
 
-	public void onRespawn(PlayerRespawnEvent respawnEvent) 
+	public void onBlockBreak(BlockBreakEvent breakEvent) 
 	{
-		Player p = respawnEvent.getPlayer();
-		PotionEffect e = new PotionEffect(PotionEffectType.REGENERATION, 10, 10);
+		Player p = breakEvent.getPlayer();
+		Block b = breakEvent.getBlock();
 		
-		p.addPotionEffect(e);
+		if(p instanceof Player) 
+		{
+			if(b.getType() == Material.ACACIA_STAIRS)
+			{
+				b.setType(Material.AIR);
+				
+				PotionEffect e = new PotionEffect(PotionEffectType.REGENERATION, 10, 10);
+				p.addPotionEffect(e);
+			}			
+		}
 	}
 }
